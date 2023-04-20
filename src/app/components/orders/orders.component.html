@@ -1,0 +1,58 @@
+<div class="page-header d-md-flex justify-content-between">
+    <div>
+        <h3>Orders</h3>
+        <nav aria-label="breadcrumb" class="d-flex align-items-start">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    Orders list
+                </li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="user-list" class="table table-lg">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Client Name</th>
+                                <th>Phone</th>
+                                <th>Total Price</th>
+                                <th class="text-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <tr *ngFor="let order of AllOrders; let i = index">
+                                <td>{{i+1}}</td>
+                                <td>{{order.userName}}</td>
+                                <td>{{order.phone}} </td>
+                                <td>{{order.totalPrice}} BHD</td>
+                                
+                                <td class="text-right">
+                                    <div class="dropdown">
+                                        <a href="#" data-toggle="dropdown"
+                                           class="btn btn-floating"
+                                           aria-haspopup="true" aria-expanded="false">
+                                            <i class="ti-more-alt"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a href="#" class="dropdown-item text-success">Details</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

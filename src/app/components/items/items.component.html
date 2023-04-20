@@ -1,0 +1,154 @@
+<div class="page-header d-md-flex justify-content-between">
+    <div>
+        <h3>Users</h3>
+        <nav aria-label="breadcrumb" class="d-flex align-items-start">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    Items Management
+                </li>
+            </ol>
+        </nav>
+    </div>
+    <div class="mt-2 mt-md-0">
+        <button (click)="openAddModal(modalForm)" class="btn btn-success">Add new Item</button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="card" >
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="user-list" class="table table-lg">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Sizes</th>
+                                <th class="text-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <tr *ngFor="let item of AllItemsResponse; let i = index">
+                                <td>{{i+1}}</td>
+                                <td>
+                                    <a href="#">
+                                        <figure class="avatar avatar-sm mr-2">
+                                            <img [src]="'data:image/jpeg;base64,' + item.picture"
+                                                 class="rounded-circle" alt="avatar">
+                                        </figure>
+                                        {{item.name}}
+                                    </a>
+                                </td>
+                                <td>{{item.price}} BHD</td>
+                                <td>
+                                    {{item.size}}
+                                </td>
+                                <td class="text-right">
+                                    <div class="dropdown">
+                                        <a href="#" data-toggle="dropdown"
+                                           class="btn btn-floating"
+                                           aria-haspopup="true" aria-expanded="false">
+                                            <i class="ti-more-alt"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <button (click)="openEditModal(modalForm, item.id)" type="button" class="dropdown-item text-success">Edit</button>
+                                            <button  style="cursor: pointer" class="dropdown-item text-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #modalForm>
+        
+    <div class="modal-content">
+        <div class="modal-header">
+            <h6 class="modal-title">{{ItemToEdit ? 'Update item' : 'Add new item'}}</h6>
+            <button (click)="modalService.dismissAll()" type="button" class="close">
+                <i class="ti-close"></i>
+            </button>
+            </div>
+            <form [formGroup]="AddItemForm" (ngSubmit)="saveItem(AddItemForm.value)" autocomplete="off">
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Item Name</label>
+                            <input formControlName="name" type="text" class="form-control" />
+                        </div> 
+                    </div>
+                </div>
+                <div class="row">
+                  
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Price</label>
+                            <input formControlName="price" type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                   
+                    <div class="{{ItemToEdit !== null ? 'col-10' : 'col-12'}}">
+                        <div class="form-group">
+                            <label>Picture</label>
+                            <input (change)="imgFunction($event)" type="file" class="form-control" />
+                        </div>
+                    </div>
+                    <div *ngIf="ItemToEdit !== null" class="col-2 ">
+                            <img  [src]="'data:image/jpeg;base64,' + ItemToEdit.picture"
+                               style="height: 70px;width: 100px;margin-top: 5px;" alt="avatar">
+                    </div>
+                </div>
+
+                <div formArrayName="sizes" *ngFor="let item of sizesGetter.controls; let i = index;">
+                    <div [formGroupName]="i" class="row">
+                        <div class="col-5">
+                            <div class="form-group">
+                                <label>Size Name</label>
+                                <input formControlName="name" type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="form-group">
+                                <label>Size Price</label>
+                                <input formControlName="price" type="number" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="col-2">
+                            <div *ngIf="i === 0" class="form-group" style="margin-top: 27%;">
+                                <button type="button" (click)="addNewRow()" class="btn btn-success add-size">Add</button>
+                            </div>
+                            <div *ngIf="i !== 0" class="form-group" style="margin-top: 27%;">
+                                <button type="button" (click)="deleteRow(i)" class="btn btn-danger add-size">Delete</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" id="btnSaveHours" class="btn btn-primary"  >Save</button>
+                <button (click)="modalService.dismissAll()" type="button" class="btn btn-secondary">
+                    Close
+                </button>
+            </div>
+        </form>
+    </div>
+    
+</ng-template>

@@ -1,13 +1,57 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>PosAngular</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> POSTest</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/assets/media/image/favicon.png" />
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="assets/vendors/bundle.css" type="text/css">
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Range slider -->
+    <link rel="stylesheet" href="assets/vendors/range-slider/css/ion.rangeSlider.min.css" type="text/css">
+
+    <!-- App css -->
+    <link rel="stylesheet" href="assets/assets/css/app.min.css" type="text/css">
 </head>
-<body>
-  <app-root></app-root>
+
+  
+  <body class="horizontal-navigation">
+
+    <app-root></app-root>
+  
+
+    <script src="assets/vendors/bundle.js"></script>
+
+    <!-- Range slider -->
+    <script src="assets/vendors/range-slider/js/ion.rangeSlider.min.js"></script>
+
+    <!-- <script src="assets/assets/js/examples/pages/product-list.js"></script> -->
+
+    <!-- App scripts -->
+    <script src="assets/assets/js/app.min.js"></script>
+    <!-- <script type="text/javascript">
+      $(document).on('click', '.add-size', function(){
+          var size = $('div[for="sizes"]:first').clone();
+    
+          size.find('.add-size').addClass('remove-size');
+          size.find('.add-size').addClass('btn-danger');
+          size.find('.add-size').text('Remove');
+          size.find('.add-size').removeClass('add-size');
+          $('#frmItem .modal-body').append(size);
+      });
+      
+      $(document).on('click', '.remove-size', function () {
+          $(this).closest('div[for="sizes"]').remove();
+      });
+    </script> -->
+    
 </body>
 </html>
