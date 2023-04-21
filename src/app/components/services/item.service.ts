@@ -33,4 +33,8 @@ export class ItemService {
   updateItem(requestBody: ItemUpdateRequestDTO, itemId: number) {
     return this.httpClient.put(`${environment.apiUrl}/Items/${itemId}`, requestBody);
   }
+
+  deleteItem(ItemId: number) {
+    return this.httpClient.post<any>(`${environment.apiUrl}/Items/Delete`, ItemId);
+  }
 }

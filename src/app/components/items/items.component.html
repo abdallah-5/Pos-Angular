@@ -56,7 +56,7 @@
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right">
                                             <button (click)="openEditModal(modalForm, item.id)" type="button" class="dropdown-item text-success">Edit</button>
-                                            <button  style="cursor: pointer" class="dropdown-item text-danger">Delete</button>
+                                            <button (click)="deleteItem(item.id)" style="cursor: pointer" class="dropdown-item text-danger">Delete</button>
                                         </div>
                                     </div>
                                 </td>

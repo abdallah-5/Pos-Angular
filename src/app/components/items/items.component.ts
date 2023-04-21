@@ -25,21 +25,21 @@ export class ItemsComponent implements OnInit {
     public modalService: NgbModal,
     private itemService: ItemService
   ) { 
-    this.getAllItemsList();
+    this.getAllItems();
   }
 
   ngOnInit(): void {
 
     /// 
 
-    this.getAllItemsList();
+    this.getAllItems();
     this.formCreation();
 
     ////
     
   }
 
-  getAllItemsList() { this.itemService.getAllItems().subscribe(data => { this.AllItemsResponse = data; }); }
+  getAllItems() { this.itemService.getAllItems().subscribe(data => { this.AllItemsResponse = data; }); }
 
   formCreation() {
     this.AddItemForm = this.fb.group({
@@ -75,7 +75,7 @@ export class ItemsComponent implements OnInit {
       this.itemService.updateItem(itemAddRequest, this.ItemToEdit.id).subscribe({
         next: data => {
           this.modalService.dismissAll();
-          this.getAllItemsList();
+          this.getAllItems();
 
         },
         error: err => { }
@@ -86,7 +86,7 @@ export class ItemsComponent implements OnInit {
       this.itemService.addNewItem(itemAddRequest).subscribe({
         next: data => {
           this.modalService.dismissAll();
-          this.getAllItemsList();
+          this.getAllItems();
 
         },
         error: err => { }
@@ -131,6 +131,17 @@ export class ItemsComponent implements OnInit {
       }
     });
 
+  }
+
+  deleteItem(itemId: number) {
+    this.itemService.deleteItem(itemId).subscribe({
+      error: err => {
+        console.log(err);
+      },
+      complete: () => {
+        this.getAllItems();        
+      }
+    });
   }
 
 }
